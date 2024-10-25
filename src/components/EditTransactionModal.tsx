@@ -19,6 +19,7 @@ import { InputElement, InputLabel, SelectInput } from "./InputComponents";
 import { TRANSACTION_HEADERS } from "../utils/headerUtils";
 import userStore from "../store/UserStore";
 import transactionStore from "../store/TransactionStore";
+import TransactionModel from "../store/TransactionModel";
 import {
   EditTransactionModalType,
   ReactElementFunctionType,
@@ -79,9 +80,13 @@ const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
       return true;
     };
 
-    const handleEditSuccess: (data: TransactionType) => void = (data) => {
+    const handleEditSuccess: (data: TransactionType) => void = (
+      transaction
+    ) => {
       toast.success("Transaction Updated");
-      transactionStore.updateTransaction(data);
+      const { id } = transaction;
+      const transactionObject = transactionStore.getTransaction(id)!;
+      transactionObject.updateTransaction(transaction);
       setFormData({
         name: "",
         type: "",
