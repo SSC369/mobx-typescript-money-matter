@@ -1,12 +1,12 @@
 export enum SidebarOptionsEnum {
-  dashboard = "dashboard",
-  transaction = "transactions",
+  DASHBOARD = "dashboard",
+  TRANSACTION = "transactions",
 }
-
+//captials
 export enum TabOptionsEnum {
-  transactions = "transactions",
-  credit = "credit",
-  debit = "debit",
+  TRANSACTIONS = "transactions",
+  CREDIT = "credit",
+  DEBIT = "debit",
 }
 
 interface TransactionType {

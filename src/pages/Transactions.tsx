@@ -114,7 +114,7 @@ const Transactions: React.FC = observer(() => {
     | React.ReactNode[] = () => {
     let filteredData: React.ReactElement[] = [];
     transactions?.forEach((data) => {
-      if (data.type === TabOptionsEnum.credit) {
+      if (data.type === TabOptionsEnum.CREDIT) {
         filteredData.push(
           <TransactionItem
             key={v4()}
@@ -141,7 +141,7 @@ const Transactions: React.FC = observer(() => {
     | React.ReactNode[] = () => {
     let filteredData: React.ReactElement[] = [];
     transactions?.forEach((data) => {
-      if (data.type === TabOptionsEnum.debit) {
+      if (data.type === TabOptionsEnum.DEBIT) {
         filteredData.push(
           <TransactionItem
             key={v4()}
@@ -168,11 +168,11 @@ const Transactions: React.FC = observer(() => {
     | React.ReactNode[]
     | undefined = () => {
     switch (true) {
-      case activeTab === TabOptionsEnum.transactions:
+      case activeTab === TabOptionsEnum.TRANSACTIONS:
         return renderAllTransactionTypes();
-      case activeTab === TabOptionsEnum.credit:
+      case activeTab === TabOptionsEnum.CREDIT:
         return renderCreditTransactions();
-      case activeTab === TabOptionsEnum.debit:
+      case activeTab === TabOptionsEnum.DEBIT:
         return renderDebitTransactions();
       default:
         break;

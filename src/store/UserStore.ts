@@ -11,12 +11,9 @@ class UserStore {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
-  get userContextData(): UserContextDataType | null {
-    if (this.userData?.userId) {
-      const { userId, admin } = this.userData;
-      return { userId, isAdmin: admin, showMenu: this.showMenu };
-    }
-    return null;
+  get userContextData(): UserContextDataType {
+    const { userId, admin } = this.userData;
+    return { userId, isAdmin: admin, showMenu: this.showMenu };
   }
 
   toggleMenu(): void {

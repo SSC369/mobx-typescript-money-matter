@@ -21,8 +21,8 @@ export const API_DELETE_TRANSACTION = BASE_URL + "/delete-transaction?id=";
 export const API_UPDATE_TRANSACTION = BASE_URL + "/update-transaction";
 
 export const SIDEBAR_OPTIONS: SidebarOptionsEnum[] = [
-  SidebarOptionsEnum.dashboard,
-  SidebarOptionsEnum.transaction,
+  SidebarOptionsEnum.DASHBOARD,
+  SidebarOptionsEnum.TRANSACTION,
 ];
 
 export const NUMBER_OF_TRANSACTIONS = 3;
@@ -30,9 +30,9 @@ export const LOCALSTORAGE_KEY = "userData";
 export const INITIAL_ACTIVE_TAB = "transactions";
 
 export const TAB_OPTIONS: TabOptionsEnum[] = [
-  TabOptionsEnum.transactions,
-  TabOptionsEnum.credit,
-  TabOptionsEnum.debit,
+  TabOptionsEnum.TRANSACTIONS,
+  TabOptionsEnum.CREDIT,
+  TabOptionsEnum.DEBIT,
 ];
 export const LOGIN_HEADERS = {
   "x-hasura-admin-secret": X_HASURA_ADMIN_SECRET,

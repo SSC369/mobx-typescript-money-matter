@@ -144,7 +144,6 @@ const Sidebar: React.FC = observer(() => {
       className={sidebarContainer}
     >
       {renderHeader()}
-
       <button onClick={handleMenuClose} className="md:hidden self-end mr-2">
         <IoClose className="text-xl dark:text-white" />
       </button>

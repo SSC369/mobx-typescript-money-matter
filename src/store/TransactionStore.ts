@@ -10,7 +10,13 @@ class TransactionStore {
     makeAutoObservable(this, {}, { autoBind: true });
   }
   get getTransactions(): TransactionType[] {
-    return this.transactions;
+    let latestTransactions: TransactionType[] = [];
+    const transactions: TransactionType[] = this.transactions.slice();
+    latestTransactions = transactions?.sort(
+      (first, second) => +new Date(second.date) - +new Date(first.date)
+    );
+
+    return latestTransactions;
   }
   get getTotalDebitCreditTransactionsData(): CreditAndDebitTotalType {
     return this.totalDebitCreditTransactionsData;

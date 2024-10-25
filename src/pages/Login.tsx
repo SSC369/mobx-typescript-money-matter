@@ -53,6 +53,7 @@ const Login: React.FC<{ admin: boolean }> = ({ admin }) => {
   };
 
   const handleLoginSuccess: (data: { id: number }) => void = (data) => {
+    console.log(data);
     setFormData({
       password: "",
       email: "",

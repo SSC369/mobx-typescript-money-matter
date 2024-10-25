@@ -22,24 +22,24 @@ const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
 
     const renderOption: ReactElementFunctionType = () => {
       switch (option) {
-        case SidebarOptionsEnum.dashboard:
+        case SidebarOptionsEnum.DASHBOARD:
           return (
             <>
               <GoHomeFill className="text-xl" />
-              <p className="font-medium text-base">
-                {SidebarOptionsEnum.dashboard}
+              <p className="font-medium text-base first-letter:capitalize">
+                {SidebarOptionsEnum.DASHBOARD}
               </p>
             </>
           );
 
-        case SidebarOptionsEnum.transaction:
+        case SidebarOptionsEnum.TRANSACTION:
           return (
             <>
               <TbReceiptDollar className="text-xl" />
               <p className="font-medium text-base first-letter:capitalize ">
                 {isAdmin
-                  ? "All " + SidebarOptionsEnum.transaction
-                  : SidebarOptionsEnum.transaction}
+                  ? "All " + SidebarOptionsEnum.TRANSACTION
+                  : SidebarOptionsEnum.TRANSACTION}
               </p>
             </>
           );

@@ -37,6 +37,7 @@ export const TransactionContextProvider: React.FC<
     null
   );
   const userId: number = userStore.userContextData!.userId;
+  console.log(userStore.userContextData);
   if (!userId) {
     return <></>;
   }

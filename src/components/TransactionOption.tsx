@@ -24,7 +24,7 @@ const TransactionOption: React.FC<TransactionOptionPropsType> = observer(
       return <></>;
     };
 
-    const isTransactionTab: boolean = option === TabOptionsEnum.transactions;
+    const isTransactionTab: boolean = option === TabOptionsEnum.TRANSACTIONS;
 
     return (
       <li
