@@ -19,7 +19,7 @@ const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
     const navigate: NavigateFunction = useNavigate();
     const path: string = window.location.pathname;
 
-    const currentPath: string = "/" + option;
+    const currentPath: string = NAVIGATION_PATHS[option];
 
     const renderOption: ReactElementFunctionType = () => {
       switch (option) {

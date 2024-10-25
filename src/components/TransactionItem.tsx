@@ -64,9 +64,13 @@ const TransactionItem: React.FC<TransactionItemPropsType> = observer(
 
     const renderTransactionIcon: ReactElementFunctionType = () => {
       if (isCredit) {
-        return <IoArrowUpCircleOutline className="text-xl text-green-500" />;
+        return (
+          <IoArrowUpCircleOutline fontSize={36} className=" text-green-500" />
+        );
       }
-      return <IoArrowDownCircleOutline className="text-xl text-red-500" />;
+      return (
+        <IoArrowDownCircleOutline fontSize={36} className=" text-red-500" />
+      );
     };
 
     const handleClickOptions: VoidFunctionType = () => {

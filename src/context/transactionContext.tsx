@@ -15,7 +15,7 @@ import {
   TRANSACTIONS_OFFSET,
 } from "../constants";
 import { TRANSACTION_HEADERS } from "../utils/headerUtils";
-import userStore from "../store/UserStore";
+
 import transactionStore from "../store/TransactionStore";
 import {
   CreditAndDebitTotalType,
@@ -24,7 +24,6 @@ import {
   TransactionResponseType,
 } from "../types";
 import { getDataFromLocalStorage } from "../utils/localStorageUtils";
-import UserStore from "../store/UserStore";
 
 export const TransactionContext = createContext<TransactionContextType | null>(
   null
