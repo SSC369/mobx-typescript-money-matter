@@ -7,11 +7,14 @@ import {
   TabOptionsEnum,
   TransactionOptionPropsType,
 } from "../types";
+import { useTranslation } from "react-i18next";
 
 const TransactionOption: React.FC<TransactionOptionPropsType> = observer(
   ({ option }) => {
     const { setActiveTab, activeTab } = useContext(TransactionContext)!;
     const isActiveTab: boolean = option === activeTab;
+
+    const { t } = useTranslation();
 
     const renderPointer: ReactElementFunctionType = () => {
       if (isActiveTab) {
@@ -24,8 +27,6 @@ const TransactionOption: React.FC<TransactionOptionPropsType> = observer(
       return <></>;
     };
 
-    const isTransactionTab: boolean = option === TabOptionsEnum.TRANSACTIONS;
-
     return (
       <li
         style={isActiveTab ? { color: "rgba(45, 96, 255, 1)" } : {}}
@@ -35,8 +36,7 @@ const TransactionOption: React.FC<TransactionOptionPropsType> = observer(
         }}
       >
         <p className="pb-2 first-letter:capitalize">
-          {isTransactionTab && "All "}
-          <span className="">{option}</span>
+          <span className="">{t(`header.headerTabs.${option}`)}</span>
         </p>
         {renderPointer()}
       </li>

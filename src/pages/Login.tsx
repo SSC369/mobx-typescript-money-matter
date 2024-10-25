@@ -17,7 +17,7 @@ import {
   addDataIntoLocalStorage,
   getDataFromLocalStorage,
 } from "../utils/localStorageUtils";
-import { LoginFormDataType, ReactElementFunctionType } from "../types";
+import { LoginFormDataType } from "../types";
 import UserStore from "../store/UserStore";
 
 const Login: React.FC<{ admin: boolean }> = ({ admin }) => {

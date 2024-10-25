@@ -1,0 +1,21 @@
+{
+  "header": {
+    "logo": {
+      "firstWord": "మనీ",
+      "secondWord": "మ్యాటర్స్"
+    },
+    "transactionTitle": "ట్రాన్సాక్షన్లు",
+    "dashboardTitle": "డాష్‌బోర్డ్",
+    "addTransaction": "ఆడ్ ట్రాన్సాక్షన్",
+    "transactions": "ట్రాన్సాక్షన్స్",
+    "headerTabs": {
+      "transactions": "అన్ని ట్రాన్సాక్షన్స్",
+      "credit": "క్రెడిట్",
+      "debit": "డెబిట్"
+    }
+  },
+  "sidebar": {
+    "dashboard": "డాష్‌బోర్డ్",
+    "transactions": "ట్రాన్సాక్షన్స్"
+  }
+}

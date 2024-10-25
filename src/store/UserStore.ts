@@ -7,6 +7,7 @@ import { LOCALSTORAGE_KEY } from "../constants";
 class UserStore {
   showMenu: boolean = false;
   userData: LocalStorageDataType = getDataFromLocalStorage(LOCALSTORAGE_KEY);
+  language: string = "en";
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -14,6 +15,14 @@ class UserStore {
 
   setUserData(data: LocalStorageDataType) {
     this.userData = data;
+  }
+
+  get getLanguage(): string {
+    return this.language;
+  }
+
+  setLanguage(lan: string): void {
+    this.language = lan;
   }
 
   get getUserData(): LocalStorageDataType | null {

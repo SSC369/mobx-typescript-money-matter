@@ -12,13 +12,14 @@ import {
   VoidFunctionType,
 } from "../types";
 import { NAVIGATION_PATHS } from "../constants";
+import { useTranslation } from "react-i18next";
 
 const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
   ({ option }) => {
     const { isAdmin } = userStore.userContextData!;
     const navigate: NavigateFunction = useNavigate();
     const path: string = window.location.pathname;
-
+    const { t } = useTranslation();
     const currentPath: string = NAVIGATION_PATHS[option];
 
     const renderOption: ReactElementFunctionType = () => {
@@ -28,7 +29,7 @@ const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
             <>
               <GoHomeFill className="text-xl" />
               <p className="font-medium text-base first-letter:capitalize">
-                {SidebarOptionsEnum.DASHBOARD}
+                {t(`sidebar.${SidebarOptionsEnum.DASHBOARD}`)}
               </p>
             </>
           );
@@ -39,8 +40,8 @@ const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
               <TbReceiptDollar className="text-xl" />
               <p className="font-medium text-base first-letter:capitalize ">
                 {isAdmin
-                  ? "All " + SidebarOptionsEnum.TRANSACTION
-                  : SidebarOptionsEnum.TRANSACTION}
+                  ? "All " + t(`sidebar.${SidebarOptionsEnum.TRANSACTION}`)
+                  : t(`sidebar.${SidebarOptionsEnum.TRANSACTION}`)}
               </p>
             </>
           );

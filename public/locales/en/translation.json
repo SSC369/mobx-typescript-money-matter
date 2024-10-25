@@ -1,0 +1,21 @@
+{
+  "header": {
+    "logo": {
+      "firstWord": "Money",
+      "secondWord": "Matters"
+    },
+    "transactionTitle": "Transaction",
+    "dashboardTitle": "Dashboard",
+    "addTransaction": "Add Transaction",
+    "transactions": "Transactions",
+    "headerTabs": {
+      "transactions": "All Transactions",
+      "credit": "credit",
+      "debit": "debit"
+    }
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "transactions": "Transactions"
+  }
+}

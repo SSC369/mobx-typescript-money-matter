@@ -28,6 +28,9 @@ import {
   VoidFunctionType,
   VoidPromiseFunctionType,
 } from "../types";
+import UserStore from "../store/UserStore";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 
 const Sidebar: React.FC = observer(() => {
   const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
@@ -35,7 +38,11 @@ const Sidebar: React.FC = observer(() => {
   const [isLogoutLoading, setIsLogoutLoading] = useState<boolean>(false);
   const { userId } = userStore.userContextData!;
 
+  const { t } = useTranslation();
+
   const navigate: NavigateFunction = useNavigate();
+
+  const changeLanguage = (lng: string) => i18next.changeLanguage(lng);
 
   useEffect(() => {
     fetchUserProfile();
@@ -77,9 +84,9 @@ const Sidebar: React.FC = observer(() => {
         style={{ color: "rgba(248, 154, 35, 1)" }}
         className="font-bold hidden md:block text-xl text-center mb-6"
       >
-        Money{" "}
-        <span className="" style={{ color: "rgba(2, 150, 156, 1)" }}>
-          Matters
+        {t("header.logo.firstWord")}
+        <span className="ml-1" style={{ color: "rgba(2, 150, 156, 1)" }}>
+          {t("header.logo.secondWord")}
         </span>
       </h1>
     );
@@ -133,7 +140,46 @@ const Sidebar: React.FC = observer(() => {
     userStore.toggleMenu();
   };
 
+  const currentLanguage: string = i18next.language;
+  console.log(currentLanguage);
+
+  const renderLanguages = () => {
+    return (
+      <ul className="pl-8 flex flex-col gap-4 mt-8">
+        <li
+          onClick={() => {
+            changeLanguage("en");
+            UserStore.setLanguage("en");
+            handleMenuClose();
+          }}
+          className={` cursor-pointer ${
+            currentLanguage === "en"
+              ? "text-blue-600 font-semibold"
+              : "text-slate-500 dark:text-slate-200"
+          }`}
+        >
+          <button>English</button>
+        </li>
+        <li
+          onClick={() => {
+            changeLanguage("te");
+            UserStore.setLanguage("te");
+            handleMenuClose();
+          }}
+          className={` cursor-pointer ${
+            currentLanguage === "te"
+              ? "text-blue-600 font-semibold"
+              : "text-slate-500 dark:text-slate-200"
+          }`}
+        >
+          <button>తెలుగు</button>
+        </li>
+      </ul>
+    );
+  };
+
   let isMenuClosable: boolean = userStore.showMenu || window.innerWidth >= 768;
+
   return (
     <div
       style={
@@ -148,6 +194,7 @@ const Sidebar: React.FC = observer(() => {
         <IoClose className="text-xl dark:text-white" />
       </button>
       {renderOptions()}
+      {renderLanguages()}
       {renderProfile()}
       {renderConfirmModal()}
     </div>

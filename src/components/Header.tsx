@@ -3,6 +3,7 @@ import { IoIosAdd } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import { observer } from "mobx-react-lite";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import TransactionOption from "./TransactionOption";
 import { DASHBOARD_ROUTE, TAB_OPTIONS, TRANSACTION_ROUTE } from "../constants";
@@ -20,13 +21,20 @@ const Header: React.FC = observer(() => {
   const { setShowAddTransactionModal } = useContext(TransactionContext)!;
   const navigate: NavigateFunction = useNavigate();
 
+  const { t } = useTranslation();
+
   const renderHeaderName: ReactElementFunctionType = () => {
     switch (path) {
       case DASHBOARD_ROUTE:
-        return <p className="font-semibold text-xl">Accounts</p>;
-
+        return (
+          <p className="font-semibold text-xl">
+            {t(`header.transactionTitle`)}
+          </p>
+        );
       case TRANSACTION_ROUTE:
-        return <p className="font-semibold text-xl">Transactions</p>;
+        return (
+          <p className="font-semibold text-xl">{t(`header.dashboardTitle`)}</p>
+        );
       default:
         return <></>;
     }
@@ -60,10 +68,12 @@ const Header: React.FC = observer(() => {
         <ToggleButton />
         <button
           onClick={handleShowAddTransactionModal}
-          className="bg-blue-600 dark:bg-slate-700 text-white rounded-lg flex items-center p-1 pr-2"
+          className="bg-blue-600 dark:bg-slate-700 text-white rounded-lg flex items-center p-1 md:p-2 md:pr-4 pr-2"
         >
           <IoIosAdd className="text-xl md:text-2xl" />{" "}
-          <span className="text-xs">Add Transaction</span>
+          <span className="text-xs md:text-sm">
+            {t("header.addTransaction")}
+          </span>
         </button>
       </div>
     );
@@ -80,9 +90,9 @@ const Header: React.FC = observer(() => {
         style={{ color: "rgba(248, 154, 35, 1)" }}
         className="font-semibold md:hidden text-base text-center mr-auto ml-4 cursor-pointer"
       >
-        Money{" "}
-        <span className="" style={{ color: "rgba(2, 150, 156, 1)" }}>
-          Matters
+        {t("header.logo.firstWord")}
+        <span className="ml-1" style={{ color: "rgba(2, 150, 156, 1)" }}>
+          {t("header.logo.secondWord")}
         </span>
       </h1>
     );
