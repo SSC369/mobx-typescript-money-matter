@@ -17,5 +17,55 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "transactions": "Transactions"
+  },
+
+  "dashboard": {
+    "totals": {
+      "title": "Accounts",
+      "credit": "credit",
+      "debit": "debit"
+    },
+    "title": "Last Transactions"
+  },
+
+  "transactions": {
+    "title": "Transactions"
+  },
+
+  "confirmModal": {
+    "logout": {
+      "title": "Are you sure you want to logout?",
+      "description": "You will be logged out immediately.",
+      "buttons": {
+        "yes": "Yes, Logout",
+        "no": "No, Leave it"
+      }
+    },
+    "delete": {
+      "title": "Are you sure you want to delete?",
+      "description": "This transaction will be deleted immediately. You can’t undo this action.",
+      "buttons": {
+        "yes": "Yes, Delete",
+        "no": "No, Leave it"
+      }
+    }
+  },
+
+  "transactionModal": {
+    "transactionName": "Transaction Name",
+    "transactionType": "Transaction Type",
+    "category": "Category",
+    "amount": "Amount",
+    "date": "Date",
+    "add": {
+      "title": "Add Transaction",
+      "description": "Add your transaction",
+      "buttonText": "Add Transaction"
+    },
+    "edit": {
+      "title": "Update Transaction",
+      "description": "Update your transaction",
+      "buttonText": "Edit Transaction"
+    }
   }
 }

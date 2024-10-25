@@ -71,6 +71,18 @@ export const ACTION_TYPES = {
   add: "add",
 };
 
+export const LANGUAGE_OPTIONS = {
+  ENGLISH: "English",
+  TELUGU: "తెలుగు",
+  HINDI: "हिंदी",
+};
+
+export const LANGUAGES_FOLDER = {
+  TELUGU: "te",
+  ENGLISH: "en",
+  HINDI: "hi",
+};
+
 export const DATE_FORMAT = "DD MMM YY, hh:mm A";
 export const INPUT_DATE_FORMAT = "YYYY-MM-DDThh:mm";
 export const SUCCESS_OK = 200;

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { InputElementPropsType, SelectInputPropsType } from "../types";
+import { useTranslation } from "react-i18next";
 
 export const InputLabel: React.FC<{ name: string }> = ({ name }) => (
   <label className="text-sm font-medium dark:text-slate-300 text-slate-600">
@@ -20,8 +21,11 @@ export const SelectInput: React.FC<SelectInputPropsType> = (props) => {
 };
 
 export const InputElement: React.FC<InputElementPropsType> = (props) => {
+  const { t } = useTranslation();
   const isName: string =
-    props.name === "name" ? "Transaction Name" : props.name;
+    props.name === "name"
+      ? t("transactionModal.transactionName")
+      : t(`transactionModal.${props.name}`);
   return (
     <div className="flex flex-col gap-1">
       <label className="text-sm font-medium dark:text-slate-300 text-slate-600 first-letter:capitalize">

@@ -3,17 +3,19 @@ import { TailSpin } from "react-loader-spinner";
 
 import { ACTION_TYPES } from "../constants";
 import { LoadingButtonPropsType } from "../types";
+import { useTranslation } from "react-i18next";
 
 const LoadingButton: React.FC<LoadingButtonPropsType> = ({
   action,
   isLoading,
 }) => {
+  const { t } = useTranslation();
   const renderButtonText: () => string = () => {
     switch (action) {
       case ACTION_TYPES.edit:
-        return "Edit Transaction";
+        return t("transactionModal.edit.buttonText");
       case ACTION_TYPES.add:
-        return "Add Transaction";
+        return t("transactionModal.add.buttonText");
       default:
         return "";
     }

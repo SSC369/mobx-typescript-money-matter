@@ -25,6 +25,7 @@ import {
   TransactionType,
   VoidFunctionType,
 } from "../types";
+import { useTranslation } from "react-i18next";
 
 const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
   ({ onClose }) => {
@@ -37,6 +38,7 @@ const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
       date: "",
     });
     const [addLoading, setAddLoading] = useState<boolean>(false);
+    const { t } = useTranslation();
     const userId: number = userStore.userContextData!.userId;
 
     useEffect(() => {
@@ -137,7 +139,7 @@ const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
     const categoriesDropdown: ReactElementFunctionType = () => {
       return (
         <div className="relative flex flex-col gap-1">
-          <InputLabel name="Category" />
+          <InputLabel name={t("transactionModal.category")} />
           <SelectInput
             onChange={handleSelectChange}
             value={formData.category}
@@ -163,7 +165,7 @@ const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
     const transactionsDropdown: ReactElementFunctionType = () => {
       return (
         <div className="relative flex flex-col gap-1">
-          <InputLabel name="Transaction Type" />
+          <InputLabel name={t("transactionModal.transactionType")} />
           <SelectInput
             name="type"
             onChange={handleSelectChange}
@@ -237,11 +239,11 @@ const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
       return (
         <>
           <h1 className="text-xl dark:text-slate-200 font-semibold">
-            Add Transaction
+            {t("transactionModal.add.title")}
           </h1>
           {renderFormCloseButton()}
           <p className="text-slate-500 dark:text-slate-300 text-xs mt-2">
-            Add your transaction
+            {t("transactionModal.add.description")}
           </p>
         </>
       );

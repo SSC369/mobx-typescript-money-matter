@@ -27,6 +27,7 @@ import {
   VoidPromiseFunctionType,
 } from "../types";
 import TransactionModel from "../store/TransactionModel";
+import { useTranslation } from "react-i18next";
 
 const Transactions: React.FC = observer(() => {
   const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
@@ -40,6 +41,7 @@ const Transactions: React.FC = observer(() => {
     setShowEditTransactionModal,
     transactionsError,
   } = useContext(TransactionContext)!;
+  const { t } = useTranslation();
 
   const transactions = transactionStore.getTransactions;
   const [editTransactionId, setEditTransactionId] = useState<number | null>(
@@ -260,7 +262,7 @@ const Transactions: React.FC = observer(() => {
   return (
     <div className="min-h-dh w-full p-4 bg-slate-100 dark:bg-slate-800">
       <h1 className="md:hidden text-xl dark:text-slate-200 font-semibold text-center mb-4">
-        Transactions
+        {t("transactions.title")}
       </h1>
       {renderTransactionTabs()}
       {RenderTransactions()}

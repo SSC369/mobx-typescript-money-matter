@@ -9,11 +9,12 @@ import {
   ReactNodeFunctionType,
   VoidFunctionType,
 } from "../types";
+import { useTranslation } from "react-i18next";
 
 const ConfirmModal: React.FC<ConfirmModalType> = observer(
   ({ onClose, isLoading, action, actionHandler }) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
-
+    const { t } = useTranslation();
     useEffect(() => {
       setIsVisible(true); // Trigger the animation when modal is mounted
     }, []);
@@ -24,11 +25,10 @@ const ConfirmModal: React.FC<ConfirmModalType> = observer(
           return (
             <>
               <p className="font-semibold text-lg dark:text-slate-200">
-                Are you sure you want to delete?
+                {t("confirmModal.delete.title")}
               </p>
               <p className="text-slate-500 text-xs mt-1 dark:text-slate-300">
-                This transaction will be deleted immediately. You can’t undo
-                this action.
+                {t("confirmModal.delete.description")}
               </p>
             </>
           );
@@ -36,10 +36,10 @@ const ConfirmModal: React.FC<ConfirmModalType> = observer(
           return (
             <>
               <p className="font-semibold text-lg dark:text-slate-200">
-                Are you sure you want to Logout?
+                {t("confirmModal.logout.title")}
               </p>
               <p className="text-slate-500 text-xs mt-1 dark:text-slate-300">
-                You will be logged out immediately.
+                {t("confirmModal.logout.description")}
               </p>
             </>
           );
@@ -57,9 +57,9 @@ const ConfirmModal: React.FC<ConfirmModalType> = observer(
 
     const buttonText: () => string = () => {
       if (action === ACTION_TYPES.delete) {
-        return "Yes, Delete";
+        return t("confirmModal.delete.buttons.yes");
       }
-      return "Yes, Logout";
+      return t("confirmModal.logout.buttons.yes");
     };
 
     const renderModalButtons: ReactElementFunctionType = () => {
@@ -67,7 +67,7 @@ const ConfirmModal: React.FC<ConfirmModalType> = observer(
         <div className="flex items-center gap-4 mt-4 text-sm">
           <button
             onClick={actionHandler}
-            className="bg-red-600 hover:bg-red-500 text-white rounded-xl py-2 w-[120px] flex items-center justify-center"
+            className="bg-red-600 hover:bg-red-500 text-white rounded-xl py-2 px-4 flex items-center justify-center"
           >
             {isLoading ? (
               <TailSpin
@@ -86,9 +86,9 @@ const ConfirmModal: React.FC<ConfirmModalType> = observer(
           </button>
           <button
             onClick={handleCloseModal}
-            className="border-slate-200 dark:border-slate-600 dark:text-slate-200 border-2 w-[120px] text-black rounded-xl py-2 hover:bg-slate-600"
+            className="border-slate-200 dark:border-slate-600 dark:text-slate-200 border-2 px-4 py-2 text-black rounded-xl"
           >
-            No, Leave it
+            {t("confirmModal.delete.buttons.no")}
           </button>
         </div>
       );
@@ -111,7 +111,7 @@ const ConfirmModal: React.FC<ConfirmModalType> = observer(
         }`}
       >
         <div
-          className={`relative flex w-[440px] flex-col justify-center rounded-xl dark:bg-slate-800 bg-white px-4 py-6 transform transition-transform duration-300 ${
+          className={`relative flex  flex-col justify-center rounded-xl dark:bg-slate-800 bg-white px-4 py-6 transform transition-transform duration-300 ${
             isVisible ? "scale-100" : "scale-90"
           }`}
         >
@@ -122,8 +122,8 @@ const ConfirmModal: React.FC<ConfirmModalType> = observer(
           <div className="flex items-start gap-4">
             {RenderModalIcon()}
 
-            <div className="flex flex-col mt-[-4px]">
-              {renderActionHeading()}
+            <div className="flex flex-col mt-[-4px] pr-[40px]">
+              <div className="max-w-[300px]">{renderActionHeading()}</div>
               {renderModalButtons()}
             </div>
           </div>

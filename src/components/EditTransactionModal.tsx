@@ -27,12 +27,12 @@ import {
   TransactionResponseType,
   VoidFunctionType,
 } from "../types";
+import { useTranslation } from "react-i18next";
 
 const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
   ({ onClose, data }) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const { transactionName, type, category, amount, date, id } = data;
-
     const [formData, setFormData] = useState<TransactionFormData>({
       name: transactionName,
       type,
@@ -42,6 +42,7 @@ const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
       date: dayjs(new Date(date)).format(INPUT_DATE_FORMAT),
     });
     const [isEditLoading, setIsEditLoading] = useState<boolean>(false);
+    const { t } = useTranslation();
     const userId: number = userStore.userContextData!.userId;
 
     useEffect(() => {
@@ -185,7 +186,7 @@ const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
     const categoriesDropdown: ReactElementFunctionType = () => {
       return (
         <div className="relative flex flex-col gap-1">
-          <InputLabel name="Category" />
+          <InputLabel name={t("transactionModal.category")} />
           <SelectInput
             onChange={handleSelectChange}
             value={formData.category}
@@ -211,7 +212,7 @@ const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
     const transactionsDropdown: ReactElementFunctionType = () => {
       return (
         <div className="relative flex flex-col gap-1">
-          <InputLabel name="Transaction Type" />
+          <InputLabel name={t("transactionModal.transactionType")} />
           <SelectInput
             name="type"
             onChange={handleSelectChange}
@@ -249,11 +250,11 @@ const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
       return (
         <>
           <h1 className="text-xl font-semibold dark:text-slate-200">
-            Update Transaction
+            {t("transactionModal.edit.title")}
           </h1>
           {renderFormCloseButton()}
           <p className="dark:text-slate-300 text-slate-500 text-xs mt-1">
-            Update your transaction
+            {t("transactionModal.edit.description")}
           </p>
         </>
       );

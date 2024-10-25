@@ -12,6 +12,7 @@ import ConfirmModal from "./ConfirmModal";
 import {
   ACTION_TYPES,
   API_PROFILE_URL,
+  LANGUAGE_OPTIONS,
   LOCALSTORAGE_KEY,
   LOGIN_ROUTE,
   SIDEBAR_OPTIONS,
@@ -28,9 +29,9 @@ import {
   VoidFunctionType,
   VoidPromiseFunctionType,
 } from "../types";
-import UserStore from "../store/UserStore";
-import i18next from "i18next";
 import { useTranslation } from "react-i18next";
+import LanguageOption from "./LanguageOption";
+import { v4 } from "uuid";
 
 const Sidebar: React.FC = observer(() => {
   const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
@@ -41,8 +42,6 @@ const Sidebar: React.FC = observer(() => {
   const { t } = useTranslation();
 
   const navigate: NavigateFunction = useNavigate();
-
-  const changeLanguage = (lng: string) => i18next.changeLanguage(lng);
 
   useEffect(() => {
     fetchUserProfile();
@@ -140,40 +139,19 @@ const Sidebar: React.FC = observer(() => {
     userStore.toggleMenu();
   };
 
-  const currentLanguage: string = i18next.language;
-  console.log(currentLanguage);
-
   const renderLanguages = () => {
+    const languages: string[] = Object.keys(LANGUAGE_OPTIONS);
     return (
       <ul className="pl-8 flex flex-col gap-4 mt-8">
-        <li
-          onClick={() => {
-            changeLanguage("en");
-            UserStore.setLanguage("en");
-            handleMenuClose();
-          }}
-          className={` cursor-pointer ${
-            currentLanguage === "en"
-              ? "text-blue-600 font-semibold"
-              : "text-slate-500 dark:text-slate-200"
-          }`}
-        >
-          <button>English</button>
-        </li>
-        <li
-          onClick={() => {
-            changeLanguage("te");
-            UserStore.setLanguage("te");
-            handleMenuClose();
-          }}
-          className={` cursor-pointer ${
-            currentLanguage === "te"
-              ? "text-blue-600 font-semibold"
-              : "text-slate-500 dark:text-slate-200"
-          }`}
-        >
-          <button>తెలుగు</button>
-        </li>
+        {languages.map((language: string) => {
+          return (
+            <LanguageOption
+              key={v4()}
+              handleMenuClose={handleMenuClose}
+              language={language}
+            />
+          );
+        })}
       </ul>
     );
   };

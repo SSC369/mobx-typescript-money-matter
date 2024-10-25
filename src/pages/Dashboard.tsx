@@ -17,6 +17,7 @@ import userStore from "../store/UserStore";
 import transactionStore from "../store/TransactionStore";
 import { ReactElementFunctionType, VoidPromiseFunctionType } from "../types";
 import TransactionModel from "../store/TransactionModel";
+import { useTranslation } from "react-i18next";
 
 const Dashboard: React.FC = observer(() => {
   const {
@@ -27,12 +28,12 @@ const Dashboard: React.FC = observer(() => {
     setShowEditTransactionModal,
     transactionsError,
   } = useContext(TransactionContext)!;
-
   const [editTransactionId, setEditTransactionId] = useState<number | null>(
     null
   );
   const [isDeleteLoading, setIsDeleteLoading] = useState<boolean>(false);
   const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
+  const { t } = useTranslation();
   const { userId } = userStore.userContextData!;
   const latestTransactions = transactionStore.getLatestTransactions;
 
@@ -163,11 +164,11 @@ const Dashboard: React.FC = observer(() => {
   return (
     <div className="min-h-dh w-full p-4 dark:bg-slate-800 bg-slate-100">
       <h1 className="font-semibold text-xl text-center mb-4 dark:text-slate-200 text-slate-700 md:hidden">
-        Accounts
+        {t("dashboard.totals.title")}
       </h1>
       <TotalDebitCredit />
       <h1 className="font-semibold mt-4 text-center md:text-left text-xl dark:text-slate-200">
-        Last Transactions
+        {t(`dashboard.title`)}
       </h1>
 
       {renderLatestTransactions()}

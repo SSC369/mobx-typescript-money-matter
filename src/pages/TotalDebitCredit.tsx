@@ -7,12 +7,15 @@ import debitImage from "../assets/debit.png";
 import Loader from "../components/Loader";
 import { TRANSACTION_TYPES_OBJECT } from "../constants";
 import transactionStore from "../store/TransactionStore";
+import { useTranslation } from "react-i18next";
 
 const TotalDebitCredit: React.FC = observer(() => {
   const {
     isTotalDebitCreditTransactionsLoading,
     totalDebitCreditTransactionsError,
   } = useContext(TransactionContext)!;
+
+  const { t } = useTranslation();
 
   if (totalDebitCreditTransactionsError) {
     return <h1>Something went wrong !!!</h1>;
@@ -73,7 +76,7 @@ const TotalDebitCredit: React.FC = observer(() => {
                     ${sum}
                   </p>
                   <p className="text-sm dark:text-slate-200 text-slate-600">
-                    {type}
+                    {t(`dashboard.totals.${type}`)}
                   </p>
                 </div>
 

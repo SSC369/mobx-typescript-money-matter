@@ -1,0 +1,71 @@
+{
+  "header": {
+    "logo": {
+      "firstWord": "मनी",
+      "secondWord": "मैटर्स"
+    },
+    "transactionTitle": "ट्रांजैक्शन",
+    "dashboardTitle": "डैशबोर्ड",
+    "addTransaction": "एड ट्रांजैक्शन",
+    "transactions": "ट्रांजैक्शंस",
+    "headerTabs": {
+      "transactions": "सभी ट्रांजैक्शंस",
+      "credit": "क्रेडिट",
+      "debit": "डेबिट"
+    }
+  },
+  "sidebar": {
+    "dashboard": "डैशबोर्ड",
+    "transactions": "ट्रांजैक्शंस"
+  },
+
+  "dashboard": {
+    "totals": {
+      "title": "अकाउंट्स",
+      "credit": "क्रेडिट",
+      "debit": "डेबिट"
+    },
+    "title": "अंतिम ट्रांजैक्शंस"
+  },
+
+  "transactions": {
+    "title": "ट्रांजैक्शंस"
+  },
+
+  "confirmModal": {
+    "logout": {
+      "title": "क्या आप वाकई लॉगआउट करना चाहते हैं?",
+      "description": "आप तुरंत लॉगआउट हो जाएंगे।",
+      "buttons": {
+        "yes": "हाँ, लॉगआउट करें",
+        "no": "नहीं, इसे छोड़ दें"
+      }
+    },
+    "delete": {
+      "title": "क्या आप वाकई इसे हटाना चाहते हैं?",
+      "description": "यह लेनदेन तुरंत हटा दिया जाएगा। आप इस क्रिया को पूर्ववत नहीं कर सकते।",
+      "buttons": {
+        "yes": "हाँ, हटाएँ",
+        "no": "नहीं, इसे छोड़ दें"
+      }
+    }
+  },
+
+  "transactionModal": {
+    "transactionName": "लेनदेन का नाम",
+    "transactionType": "लेनदेन का प्रकार",
+    "category": "श्रेणी",
+    "amount": "राशि",
+    "date": "तारीख",
+    "add": {
+      "title": "लेनदेन जोड़ें",
+      "description": "अपना लेनदेन जोड़ें",
+      "buttonText": "लेनदेन जोड़ें"
+    },
+    "edit": {
+      "title": "लेनदेन अपडेट करें",
+      "description": "अपना लेनदेन अपडेट करें",
+      "buttonText": "लेनदेन संपादित करें"
+    }
+  }
+}
