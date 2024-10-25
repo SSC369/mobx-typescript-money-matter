@@ -24,17 +24,17 @@ import {
   EditTransactionModalType,
   ReactElementFunctionType,
   TransactionFormData,
-  TransactionType,
+  TransactionResponseType,
   VoidFunctionType,
 } from "../types";
 
 const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
   ({ onClose, data }) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const { transaction_name, type, category, amount, date, id } = data;
+    const { transactionName, type, category, amount, date, id } = data;
 
     const [formData, setFormData] = useState<TransactionFormData>({
-      name: transaction_name,
+      name: transactionName,
       type,
       category,
       amount,
@@ -80,7 +80,7 @@ const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
       return true;
     };
 
-    const handleEditSuccess: (data: TransactionType) => void = (
+    const handleEditSuccess: (data: TransactionResponseType) => void = (
       transaction
     ) => {
       toast.success("Transaction Updated");

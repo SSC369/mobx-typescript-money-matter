@@ -9,9 +9,18 @@ export enum TabOptionsEnum {
   DEBIT = "debit",
 }
 
-interface TransactionType {
+export interface TransactionResponseType {
   id: number;
   transaction_name: string;
+  type: string;
+  date: string;
+  category: string;
+  amount: number;
+}
+
+interface TransactionType {
+  id: number;
+  transactionName: string;
   type: string;
   date: string;
   category: string;

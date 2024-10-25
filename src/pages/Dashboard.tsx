@@ -15,11 +15,8 @@ import { TRANSACTION_HEADERS } from "../utils/headerUtils";
 import { observer } from "mobx-react-lite";
 import userStore from "../store/UserStore";
 import transactionStore from "../store/TransactionStore";
-import {
-  ReactElementFunctionType,
-  TransactionType,
-  VoidPromiseFunctionType,
-} from "../types";
+import { ReactElementFunctionType, VoidPromiseFunctionType } from "../types";
+import TransactionModel from "../store/TransactionModel";
 
 const Dashboard: React.FC = observer(() => {
   const {
@@ -75,12 +72,12 @@ const Dashboard: React.FC = observer(() => {
 
   const getTransactionsData: () => React.ReactNode[] = () => {
     const transactionsData: React.ReactElement[] = latestTransactions?.map(
-      ({ transaction_name, id, category, amount, date, type }) => {
+      ({ transactionName, id, category, amount, date, type }) => {
         return (
           <TransactionItem
             key={id}
             data={{
-              transaction_name,
+              transactionName,
               id,
               category,
               amount,
@@ -113,8 +110,8 @@ const Dashboard: React.FC = observer(() => {
     return <></>;
   };
 
-  const getEditTransaction: () => TransactionType | undefined = () => {
-    let transactionData: TransactionType | undefined;
+  const getEditTransaction: () => TransactionModel | undefined = () => {
+    let transactionData: TransactionModel | undefined;
     if (editTransactionId) {
       transactionData = latestTransactions.find(
         (transaction) => transaction.id === editTransactionId

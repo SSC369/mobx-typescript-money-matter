@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useSWR from "swr";
+import { useNavigate } from "react-router-dom";
 
 import {
   API_ALL_TRANSACTIONS,
@@ -19,9 +20,8 @@ import {
   CreditAndDebitTotalType,
   TransactionContextProviderPropsType,
   TransactionContextType,
-  TransactionType,
+  TransactionResponseType,
 } from "../types";
-import { useNavigate } from "react-router-dom";
 
 export const TransactionContext = createContext<TransactionContextType | null>(
   null
@@ -52,7 +52,7 @@ export const TransactionContextProvider: React.FC<
 
   const transactionsFetcher: (
     url: string
-  ) => Promise<TransactionType[]> = async (url) => {
+  ) => Promise<TransactionResponseType[]> = async (url) => {
     try {
       const res = await axios({
         method: "get",

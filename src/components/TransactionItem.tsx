@@ -25,7 +25,7 @@ const TransactionItem: React.FC<TransactionItemPropsType> = observer(
     setDeleteTransactionId,
   }) => {
     const [showMenu, setShowMenu] = useState<boolean>(false);
-    const { transaction_name, id, category, amount, date, type } = data;
+    const { transactionName, id, category, amount, date, type } = data;
 
     const handleEditClick: VoidFunctionType = () => {
       setEditTransactionId(id);
@@ -80,7 +80,7 @@ const TransactionItem: React.FC<TransactionItemPropsType> = observer(
 
           <div className="flex items-center justify-between w-full">
             <p className="max-w-[200px] dark:text-white font-medium">
-              {transaction_name}
+              {transactionName}
             </p>
             <button onClick={handleClickOptions} className="md:hidden">
               <BsThreeDotsVertical className="dark:text-slate-200 text-slate-600 text-lg mb-2" />

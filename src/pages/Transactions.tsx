@@ -24,9 +24,9 @@ import transactionStore from "../store/TransactionStore";
 import {
   ReactElementFunctionType,
   TabOptionsEnum,
-  TransactionType,
   VoidPromiseFunctionType,
 } from "../types";
+import TransactionModel from "../store/TransactionModel";
 
 const Transactions: React.FC = observer(() => {
   const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
@@ -85,12 +85,12 @@ const Transactions: React.FC = observer(() => {
       return <EmptyView />;
     }
     const data: React.ReactElement[] = transactions?.map(
-      ({ transaction_name, id, category, amount, date, type }) => {
+      ({ transactionName, id, category, amount, date, type }) => {
         return (
           <TransactionItem
             key={v4()}
             data={{
-              transaction_name,
+              transactionName,
               id,
               category,
               amount,
@@ -213,10 +213,8 @@ const Transactions: React.FC = observer(() => {
     return <></>;
   };
 
-  const getTransaction: (
-    editTransactionId: number | null
-  ) => TransactionType | undefined = (editTransactionId) => {
-    let transactionData: TransactionType | undefined;
+  const getTransaction: () => TransactionModel | undefined = () => {
+    let transactionData: TransactionModel | undefined;
     if (editTransactionId) {
       transactionData = transactions.find(
         (transaction) => transaction.id === editTransactionId
@@ -227,7 +225,7 @@ const Transactions: React.FC = observer(() => {
 
   const renderEditTransactionModal: ReactElementFunctionType = () => {
     if (showEditTransactionModal) {
-      const data = getTransaction(editTransactionId)!;
+      const data = getTransaction()!;
       return (
         <EditTransactionModal
           onClose={() => {

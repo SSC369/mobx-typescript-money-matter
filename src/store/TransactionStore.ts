@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 import { NUMBER_OF_TRANSACTIONS } from "../constants";
-import { CreditAndDebitTotalType, TransactionType } from "../types";
+import { CreditAndDebitTotalType, TransactionResponseType } from "../types";
 import TransactionModel from "./TransactionModel";
 import TotalTransactionsModel from "./TotalTransactionsModel";
 
@@ -29,7 +29,7 @@ class TransactionStore {
     return this.totalDebitCreditTransactionsData;
   }
 
-  setTransactions(data: TransactionType[]): void {
+  setTransactions(data: TransactionResponseType[]): void {
     data.forEach((transaction) => {
       const { transaction_name, amount, type, id, date, category } =
         transaction;
@@ -53,7 +53,7 @@ class TransactionStore {
     });
   }
 
-  addTransaction(transaction: TransactionType): void {
+  addTransaction(transaction: TransactionResponseType): void {
     const { transaction_name, amount, type, id, date, category } = transaction;
     const transactionObject = new TransactionModel(
       transaction_name,
