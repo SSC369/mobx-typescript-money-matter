@@ -2,12 +2,12 @@ import { TransactionType } from "../types";
 import transactionStore from "./TransactionStore";
 
 class TransactionModel {
-  transaction_name;
-  id;
-  type;
-  date;
-  category;
-  amount;
+  transaction_name: string;
+  id: number;
+  type: string;
+  date: string;
+  category: string;
+  amount: number;
   constructor(
     transaction_name: string,
     id: number,

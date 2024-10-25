@@ -6,10 +6,10 @@ import {
 } from "react-icons/io5";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { observer } from "mobx-react-lite";
 
 import { DATE_FORMAT, TRANSACTION_TYPES_OBJECT } from "../constants";
 import { transactionListItem } from "../styles";
-import { observer } from "mobx-react-lite";
 import {
   ReactElementFunctionType,
   TransactionItemPropsType,

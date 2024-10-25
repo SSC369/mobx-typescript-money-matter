@@ -8,6 +8,7 @@ import { TransactionContext } from "../context/transactionContext";
 import AddTransactionModal from "../components/AddTransactionModal";
 import themeStore from "../store/ThemeStore";
 import { ReactElementFunctionType } from "../types";
+import { DARK_MODE_KEY } from "../constants";
 
 const Home: React.FC = observer(() => {
   const { showAddTransactionModal, setShowAddTransactionModal } =
@@ -25,7 +26,11 @@ const Home: React.FC = observer(() => {
   };
 
   return (
-    <div className={`relative ${themeStore.getTheme === "dark" ? "dark" : ""}`}>
+    <div
+      className={`relative ${
+        themeStore.getTheme === DARK_MODE_KEY ? "dark" : ""
+      }`}
+    >
       <Sidebar />
       <div className="md:ml-[200px] ">
         <Header />

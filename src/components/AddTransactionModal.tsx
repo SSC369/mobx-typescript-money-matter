@@ -96,7 +96,7 @@ const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
         e.preventDefault();
         if (transactionValidation()) {
           const { name, category, date, type, amount } = formData;
-          const url = API_ADD_TRANSACTION;
+          const url: string = API_ADD_TRANSACTION;
 
           const res = await axios.post(
             url,

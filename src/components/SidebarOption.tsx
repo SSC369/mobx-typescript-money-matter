@@ -2,8 +2,8 @@ import React from "react";
 import { GoHomeFill } from "react-icons/go";
 import { TbReceiptDollar } from "react-icons/tb";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-
 import { observer } from "mobx-react-lite";
+
 import userStore from "../store/UserStore";
 import {
   ReactElementFunctionType,
@@ -49,7 +49,7 @@ const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
     };
 
     const isCurrentPath: boolean = path === currentPath;
-    //Add the confition into a boolean variable (Conditional encapsulation)
+
     const renderPointer: ReactElementFunctionType = () => {
       if (isCurrentPath) {
         return (

@@ -1,4 +1,5 @@
 import React from "react";
+
 import { LoaderPropsType } from "../types";
 
 const Loader: React.FC<LoaderPropsType> = ({ width = 30, height = 30 }) => (

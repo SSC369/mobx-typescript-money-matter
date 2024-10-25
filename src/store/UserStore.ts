@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+
 import { LOCALSTORAGE_KEY } from "../constants";
 import { getDataFromLocalStorage } from "../utils/localStorageUtils";
 import { LocalStorageDataType, UserContextDataType } from "../types";

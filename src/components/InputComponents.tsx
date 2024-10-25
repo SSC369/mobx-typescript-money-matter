@@ -1,4 +1,5 @@
 import React from "react";
+
 import { InputElementPropsType, SelectInputPropsType } from "../types";
 
 export const InputLabel: React.FC<{ name: string }> = ({ name }) => (

@@ -7,6 +7,7 @@ import {
   API_ALL_TRANSACTIONS,
   API_TOTAL_DEBIT_CREDIT_TRANSACTIONS,
   INITIAL_ACTIVE_TAB,
+  LOGIN_ROUTE,
   SUCCESS_OK,
   TRANSACTIONS_LIMIT,
   TRANSACTIONS_OFFSET,
@@ -20,6 +21,7 @@ import {
   TransactionContextType,
   TransactionType,
 } from "../types";
+import { useNavigate } from "react-router-dom";
 
 export const TransactionContext = createContext<TransactionContextType | null>(
   null
@@ -37,10 +39,16 @@ export const TransactionContextProvider: React.FC<
     null
   );
   const userId: number = userStore.userContextData!.userId;
-
+  const navigate = useNavigate();
   if (!userId) {
     return <></>;
   }
+
+  useEffect(() => {
+    if (!userId) {
+      navigate(LOGIN_ROUTE);
+    }
+  }, []);
 
   const transactionsFetcher: (
     url: string

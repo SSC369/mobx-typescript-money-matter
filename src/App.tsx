@@ -1,6 +1,7 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Transactions from "./pages/Transactions";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -12,7 +13,6 @@ import {
   DASHBOARD_ROUTE,
   ADMIN_LOGIN_ROUTE,
 } from "./constants";
-
 import { TransactionContextProvider } from "./context/transactionContext";
 
 const App: React.FC = () => {

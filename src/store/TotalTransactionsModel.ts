@@ -1,6 +1,6 @@
 class TotalTransactionsModel {
-  sum;
-  type;
+  sum: number;
+  type: string;
   constructor(sum: number, type: string) {
     this.sum = sum;
     this.type = type;

@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+
 import { NUMBER_OF_TRANSACTIONS } from "../constants";
 import { CreditAndDebitTotalType, TransactionType } from "../types";
 import TransactionModel from "./TransactionModel";

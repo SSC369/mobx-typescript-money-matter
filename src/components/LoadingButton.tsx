@@ -8,7 +8,6 @@ const LoadingButton: React.FC<LoadingButtonPropsType> = ({
   action,
   isLoading,
 }) => {
-  // ask this
   const renderButtonText: () => string = () => {
     switch (action) {
       case ACTION_TYPES.edit:

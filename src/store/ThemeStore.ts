@@ -1,13 +1,15 @@
 import { makeAutoObservable, reaction } from "mobx";
 
+import { LIGHT_MODE_KEY, THEME_KEY } from "../constants";
+
 class ThemeStore {
-  theme: string = localStorage.getItem("theme") || "light";
+  theme: string = localStorage.getItem(THEME_KEY) || LIGHT_MODE_KEY;
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
     reaction(
       () => this.theme.slice(),
       (theme) => {
-        localStorage.setItem("theme", theme);
+        localStorage.setItem(THEME_KEY, theme);
       }
     );
   }

@@ -38,7 +38,6 @@ const Dashboard: React.FC = observer(() => {
   const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
   const { userId } = userStore.userContextData!;
   const latestTransactions = transactionStore.getLatestTransactions;
-  const transactions = transactionStore.getTransactions;
 
   const handleTransactionDeleteSuccess: (data: { id: number }) => void = (
     data
@@ -117,7 +116,7 @@ const Dashboard: React.FC = observer(() => {
   const getEditTransaction: () => TransactionType | undefined = () => {
     let transactionData: TransactionType | undefined;
     if (editTransactionId) {
-      transactionData = transactions.find(
+      transactionData = latestTransactions.find(
         (transaction) => transaction.id === editTransactionId
       );
     }
