@@ -11,16 +11,16 @@ class TransactionStore {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
-  sortTransactions() {
-    let sortedTransactions: TransactionType[] = [];
-    const transactions: TransactionType[] = this.transactions.slice();
+  sortTransactions(): TransactionModel[] {
+    let sortedTransactions: TransactionModel[] = [];
+    const transactions: TransactionModel[] = this.transactions.slice();
     sortedTransactions = transactions?.sort(
       (first, second) => +new Date(second.date) - +new Date(first.date)
     );
     return sortedTransactions;
   }
 
-  get getTransactions(): TransactionType[] {
+  get getTransactions(): TransactionModel[] {
     return this.sortTransactions();
   }
   get getTotalDebitCreditTransactionsData(): CreditAndDebitTotalType {
@@ -80,7 +80,7 @@ class TransactionStore {
 
   deleteTransaction(data: { id: number }): void {
     const { id } = data;
-    const transaction: TransactionType = this.transactions.find(
+    const transaction: TransactionModel = this.transactions.find(
       (data) => data.id === id
     )!;
     this.transactions = this.transactions.filter(

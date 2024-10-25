@@ -24,7 +24,7 @@ class TransactionModel {
     this.category = category;
   }
 
-  updateTransaction(transaction: TransactionType) {
+  updateTransaction(transaction: TransactionType): void {
     const { transaction_name, id, type, date, category, amount } = transaction;
     TransactionStore.removeAmountTotalDebitCreditData(this.type, this.amount);
     TransactionStore.addAmountTotalDebitCreditData(type, amount);
