@@ -9,7 +9,11 @@ import { DASHBOARD_ROUTE, TAB_OPTIONS, TRANSACTION_ROUTE } from "../constants";
 import { TransactionContext } from "../context/transactionContext";
 import ToggleButton from "./ToggleButton";
 import userStore from "../store/UserStore";
-import { ReactElementFunctionType, VoidFunctionType } from "../types";
+import {
+  ReactElementFunctionType,
+  TabOptionsEnum,
+  VoidFunctionType,
+} from "../types";
 
 const Header: React.FC = observer(() => {
   const path: string = window.location.pathname;
@@ -28,7 +32,7 @@ const Header: React.FC = observer(() => {
     }
   };
 
-  const options: string[] = Object.keys(TAB_OPTIONS);
+  const options: TabOptionsEnum[] = TAB_OPTIONS;
 
   const renderTabs: ReactElementFunctionType = () => {
     if (path === TRANSACTION_ROUTE) {
@@ -37,7 +41,7 @@ const Header: React.FC = observer(() => {
           style={{ color: "rgba(113, 142, 191, 1)" }}
           className="hidden md:flex items-center gap-6 text-sm absolute bottom-0 "
         >
-          {options.map((option: string) => (
+          {options.map((option) => (
             <TransactionOption key={option} option={option} />
           ))}
         </ul>

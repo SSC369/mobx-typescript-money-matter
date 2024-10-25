@@ -23,6 +23,7 @@ import userStore from "../store/UserStore";
 import transactionStore from "../store/TransactionStore";
 import {
   ReactElementFunctionType,
+  TabOptionsEnum,
   TransactionType,
   VoidPromiseFunctionType,
 } from "../types";
@@ -113,7 +114,7 @@ const Transactions: React.FC = observer(() => {
     | React.ReactNode[] = () => {
     let filteredData: React.ReactElement[] = [];
     transactions?.forEach((data) => {
-      if (data.type === TAB_OPTIONS.credit) {
+      if (data.type === TabOptionsEnum.credit) {
         filteredData.push(
           <TransactionItem
             key={v4()}
@@ -140,7 +141,7 @@ const Transactions: React.FC = observer(() => {
     | React.ReactNode[] = () => {
     let filteredData: React.ReactElement[] = [];
     transactions?.forEach((data) => {
-      if (data.type === TAB_OPTIONS.debit) {
+      if (data.type === TabOptionsEnum.debit) {
         filteredData.push(
           <TransactionItem
             key={v4()}
@@ -167,11 +168,11 @@ const Transactions: React.FC = observer(() => {
     | React.ReactNode[]
     | undefined = () => {
     switch (true) {
-      case activeTab === TAB_OPTIONS.transactions:
+      case activeTab === TabOptionsEnum.transactions:
         return renderAllTransactionTypes();
-      case activeTab === TAB_OPTIONS.credit:
+      case activeTab === TabOptionsEnum.credit:
         return renderCreditTransactions();
-      case activeTab === TAB_OPTIONS.debit:
+      case activeTab === TabOptionsEnum.debit:
         return renderDebitTransactions();
       default:
         break;
@@ -241,7 +242,7 @@ const Transactions: React.FC = observer(() => {
   };
 
   const renderTransactionTabs: ReactElementFunctionType = () => {
-    const options: string[] = Object.keys(TAB_OPTIONS);
+    const options: TabOptionsEnum[] = TAB_OPTIONS;
     return (
       <ul
         style={{ color: "rgba(113, 142, 191, 1)" }}

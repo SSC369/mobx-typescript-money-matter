@@ -3,12 +3,12 @@ import { GoHomeFill } from "react-icons/go";
 import { TbReceiptDollar } from "react-icons/tb";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-import { SIDEBAR_OPTIONS } from "../constants";
 import { observer } from "mobx-react-lite";
 import userStore from "../store/UserStore";
 import {
   ReactElementFunctionType,
   SidebarOptionPropsType,
+  SidebarOptionsEnum,
   VoidFunctionType,
 } from "../types";
 
@@ -22,24 +22,24 @@ const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
 
     const renderOption: ReactElementFunctionType = () => {
       switch (option) {
-        case SIDEBAR_OPTIONS.dashboard:
+        case SidebarOptionsEnum.dashboard:
           return (
             <>
               <GoHomeFill className="text-xl" />
               <p className="font-medium text-base">
-                {SIDEBAR_OPTIONS.dashboard}
+                {SidebarOptionsEnum.dashboard}
               </p>
             </>
           );
 
-        case SIDEBAR_OPTIONS.transactions:
+        case SidebarOptionsEnum.transaction:
           return (
             <>
               <TbReceiptDollar className="text-xl" />
               <p className="font-medium text-base first-letter:capitalize ">
                 {isAdmin
-                  ? "All " + SIDEBAR_OPTIONS.transactions
-                  : SIDEBAR_OPTIONS.transactions}
+                  ? "All " + SidebarOptionsEnum.transaction
+                  : SidebarOptionsEnum.transaction}
               </p>
             </>
           );

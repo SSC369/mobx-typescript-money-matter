@@ -23,6 +23,7 @@ import { sidebarContainer } from "../styles";
 import userStore from "../store/UserStore";
 import {
   ReactElementFunctionType,
+  SidebarOptionsEnum,
   UserProfileDataType,
   VoidFunctionType,
   VoidPromiseFunctionType,
@@ -85,7 +86,7 @@ const Sidebar: React.FC = observer(() => {
   };
 
   const renderOptions: ReactElementFunctionType = () => {
-    const options: string[] = Object.keys(SIDEBAR_OPTIONS);
+    const options: SidebarOptionsEnum[] = SIDEBAR_OPTIONS;
     return (
       <ul className="flex flex-col w-full">
         {options.map((option) => (

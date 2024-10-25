@@ -1,3 +1,14 @@
+export enum SidebarOptionsEnum {
+  dashboard = "dashboard",
+  transaction = "transactions",
+}
+
+export enum TabOptionsEnum {
+  transactions = "transactions",
+  credit = "credit",
+  debit = "debit",
+}
+
 interface TransactionType {
   id: number;
   transaction_name: string;
@@ -93,11 +104,11 @@ interface TransactionContextProviderPropsType {
 }
 
 interface TransactionOptionPropsType {
-  option: string;
+  option: TabOptionsEnum;
 }
 
 interface SidebarOptionPropsType {
-  option: string;
+  option: SidebarOptionsEnum;
 }
 
 type VoidPromiseFunctionType = () => Promise<void>;

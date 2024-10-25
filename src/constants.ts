@@ -1,3 +1,5 @@
+import { SidebarOptionsEnum, TabOptionsEnum } from "./types";
+
 export const LOGIN_ROUTE = "/login";
 export const ADMIN_LOGIN_ROUTE = "/admin/login";
 export const HOME_ROUTE = "/";
@@ -18,20 +20,20 @@ export const API_ADD_TRANSACTION = BASE_URL + "/add-transaction";
 export const API_DELETE_TRANSACTION = BASE_URL + "/delete-transaction?id=";
 export const API_UPDATE_TRANSACTION = BASE_URL + "/update-transaction";
 
-export const SIDEBAR_OPTIONS = {
-  dashboard: "dashboard",
-  transactions: "transactions",
-};
+export const SIDEBAR_OPTIONS: SidebarOptionsEnum[] = [
+  SidebarOptionsEnum.dashboard,
+  SidebarOptionsEnum.transaction,
+];
 
 export const NUMBER_OF_TRANSACTIONS = 3;
 export const LOCALSTORAGE_KEY = "userData";
 export const INITIAL_ACTIVE_TAB = "transactions";
-export const TAB_OPTIONS = {
-  transactions: "transactions",
-  credit: "credit",
-  debit: "debit",
-};
 
+export const TAB_OPTIONS: TabOptionsEnum[] = [
+  TabOptionsEnum.transactions,
+  TabOptionsEnum.credit,
+  TabOptionsEnum.debit,
+];
 export const LOGIN_HEADERS = {
   "x-hasura-admin-secret": X_HASURA_ADMIN_SECRET,
 };

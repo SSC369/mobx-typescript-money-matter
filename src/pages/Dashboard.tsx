@@ -51,7 +51,7 @@ const Dashboard: React.FC = observer(() => {
     try {
       setIsDeleteLoading(true);
       const url: string = API_DELETE_TRANSACTION + deleteTransactionId;
-      //ask about types for res
+      //ask type for res
       const res = await axios.delete(url, {
         headers: TRANSACTION_HEADERS(userId),
       });

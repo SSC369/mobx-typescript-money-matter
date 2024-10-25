@@ -12,7 +12,7 @@ class TransactionStore {
   get getTransactions(): TransactionType[] {
     return this.transactions;
   }
-  get gettotalDebitCreditTransactionsData(): CreditAndDebitTotalType {
+  get getTotalDebitCreditTransactionsData(): CreditAndDebitTotalType {
     return this.totalDebitCreditTransactionsData;
   }
   setTransactions(data: TransactionType[]): void {

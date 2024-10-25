@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { TransactionContext } from "../context/transactionContext";
-import { TAB_OPTIONS } from "../constants";
-import { ReactElementFunctionType, TransactionOptionPropsType } from "../types";
+import {
+  ReactElementFunctionType,
+  TabOptionsEnum,
+  TransactionOptionPropsType,
+} from "../types";
 
 const TransactionOption: React.FC<TransactionOptionPropsType> = observer(
   ({ option }) => {
@@ -21,7 +24,7 @@ const TransactionOption: React.FC<TransactionOptionPropsType> = observer(
       return <></>;
     };
 
-    const isTransactionTab: boolean = option === TAB_OPTIONS.transactions;
+    const isTransactionTab: boolean = option === TabOptionsEnum.transactions;
 
     return (
       <li
