@@ -6,12 +6,12 @@ class TotalTransactionsModel {
     this.type = type;
   }
 
-  addAmount(sum: number, type: string) {
+  addAmount(sum: number, type: string): void {
     this.sum += sum;
     this.type = type;
   }
 
-  removeAmount(sum: number, type: string) {
+  removeAmount(sum: number, type: string): void {
     this.sum -= sum;
     this.type = type;
   }

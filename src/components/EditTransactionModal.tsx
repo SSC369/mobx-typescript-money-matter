@@ -19,7 +19,7 @@ import { InputElement, InputLabel, SelectInput } from "./InputComponents";
 import { TRANSACTION_HEADERS } from "../utils/headerUtils";
 import userStore from "../store/UserStore";
 import transactionStore from "../store/TransactionStore";
-import TransactionModel from "../store/TransactionModel";
+
 import {
   EditTransactionModalType,
   ReactElementFunctionType,
