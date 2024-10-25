@@ -9,7 +9,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 import {
   API_GET_USER_ID,
-  DASHBOARD_ROUTE,
+  HOME_ROUTE,
   LOCALSTORAGE_KEY,
   LOGIN_HEADERS,
 } from "../constants";
@@ -18,6 +18,7 @@ import {
   getDataFromLocalStorage,
 } from "../utils/localStorageUtils";
 import { LoginFormDataType, ReactElementFunctionType } from "../types";
+import UserStore from "../store/UserStore";
 
 const Login: React.FC<{ admin: boolean }> = ({ admin }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -27,12 +28,13 @@ const Login: React.FC<{ admin: boolean }> = ({ admin }) => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
+  const userId = getDataFromLocalStorage(LOCALSTORAGE_KEY)?.userId;
 
   useEffect(() => {
-    if (getDataFromLocalStorage(LOCALSTORAGE_KEY)) {
-      navigate(DASHBOARD_ROUTE);
+    if (userId) {
+      navigate(HOME_ROUTE);
     }
-  }, []);
+  }, [userId, navigate]); // Add navigate as a dependency
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,58 +42,42 @@ const Login: React.FC<{ admin: boolean }> = ({ admin }) => {
 
   const handleValidation: () => boolean = () => {
     const { password, email } = formData;
-    const trimEmail = email.trim();
-    const trimPassword = password.trim();
-    if (trimEmail === "") {
-      toast.error("Please enter email !", { duration: 1000 });
+    if (!email.trim()) {
+      toast.error("Please enter email!", { duration: 1000 });
       return false;
-    } else if (trimPassword === "") {
+    }
+    if (!password.trim()) {
       toast.error("Please enter password!", { duration: 1000 });
       return false;
     }
     return true;
   };
 
-  const handleLoginSuccess: (data: { id: number }) => void = (data) => {
-    console.log(data);
-    setFormData({
-      password: "",
-      email: "",
-    });
-    addDataIntoLocalStorage(LOCALSTORAGE_KEY, {
-      admin: admin,
+  const handleLoginSuccess = (data: { id: number }) => {
+    UserStore.setUserData({
+      admin,
       userId: data.id,
     });
+    setFormData({ password: "", email: "" });
+    addDataIntoLocalStorage(LOCALSTORAGE_KEY, { admin, userId: data.id });
     toast.success("Login successful", { duration: 1000 });
     setTimeout(() => {
-      navigate(DASHBOARD_ROUTE);
+      navigate(HOME_ROUTE);
     }, 1000);
   };
 
-  const handleSubmit = async (
-    e: React.FormEvent<EventTarget>
-  ): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    const { email, password } = formData;
     try {
       setLoading(true);
       if (handleValidation()) {
-        const url: string = API_GET_USER_ID;
-        const response = await axios.post(
-          url,
-          {
-            password,
-            email,
-          },
-          {
-            headers: LOGIN_HEADERS,
-          }
-        );
-        const { data } = response;
+        const response = await axios.post(API_GET_USER_ID, formData, {
+          headers: LOGIN_HEADERS,
+        });
         if (response.status === 200) {
-          handleLoginSuccess(data.get_user_id[0]);
+          handleLoginSuccess(response.data.get_user_id[0]);
         } else {
-          toast.error("Responded with status code" + response.status);
+          toast.error(`Error: ${response.status}`);
         }
       }
     } catch (error: unknown) {
@@ -103,37 +89,65 @@ const Login: React.FC<{ admin: boolean }> = ({ admin }) => {
     }
   };
 
-  const renderPasswordIcon: ReactElementFunctionType = () => {
-    if (showPassword) {
-      return (
-        <AiOutlineEyeInvisible
-          onClick={() => setShowPassword(!showPassword)}
-          className="mr-2 cursor-pointer"
-          size={20}
-        />
-      );
-    } else {
-      //can return the component directly without the else statement
-      return (
-        <AiOutlineEye
-          onClick={() => setShowPassword(!showPassword)}
-          className="mr-2 cursor-pointer"
-          size={20}
-        />
-      );
-    }
-  };
+  const renderPasswordIcon = () =>
+    showPassword ? (
+      <AiOutlineEyeInvisible
+        onClick={() => setShowPassword(!showPassword)}
+        className="mr-2 cursor-pointer"
+        size={20}
+      />
+    ) : (
+      <AiOutlineEye
+        onClick={() => setShowPassword(!showPassword)}
+        className="mr-2 cursor-pointer"
+        size={20}
+      />
+    );
 
-  const renderPasswordInput: ReactElementFunctionType = () => {
-    return (
-      <>
+  if (userId) return null;
+
+  return (
+    <div className="flex flex-col items-center justify-center bg-white min-w-[300px] min-h-dvh">
+      <form
+        onSubmit={handleSubmit}
+        className="shadow-2xl flex flex-col gap-3 bg-white dark:bg-slate-800 p-8 w-4/5 max-w-md min-w-[300px] rounded-2xl text-sm"
+      >
+        <h1
+          style={{ color: "rgba(248, 154, 35, 1)" }}
+          className="font-bold text-xl text-center"
+        >
+          Money <span style={{ color: "rgba(2, 150, 156, 1)" }}>Matters</span>
+        </h1>
+        <h1
+          style={{ color: "rgba(80, 88, 135, 1)" }}
+          className="font-medium text-xl mb-3 text-center"
+        >
+          {admin && "Admin "}Login
+        </h1>
         <label
           style={{ color: "rgba(80, 88, 135, 1)" }}
-          className=" font-medium"
+          className="font-medium"
+        >
+          Email
+        </label>
+        <div className="flex items-center border-2 border-gray-300 rounded-lg h-12 pl-2 transition focus-within:border-blue-500">
+          <IoMdMail className="mr-2" size={20} />
+          <input
+            required
+            onChange={handleChange}
+            name="email"
+            value={formData.email}
+            type="email"
+            className="ml-2 border-none h-full focus:outline-none w-[80%]"
+            placeholder="Enter your Email"
+          />
+        </div>
+        <label
+          style={{ color: "rgba(80, 88, 135, 1)" }}
+          className="font-medium"
         >
           Password
         </label>
-
         <div className="flex items-center border-2 border-gray-300 rounded-lg h-12 pl-2 transition focus-within:border-blue-500">
           <RiLock2Line className="mr-2" size={20} />
           <input
@@ -147,103 +161,17 @@ const Login: React.FC<{ admin: boolean }> = ({ admin }) => {
           />
           {renderPasswordIcon()}
         </div>
-      </>
-    );
-  };
-
-  const renderSubmitButton: ReactElementFunctionType = () => {
-    return (
-      <button
-        type="submit"
-        className="flex justify-center items-center mt-5 mb-2 bg-blue-500 text-white font-medium text-sm rounded-lg h-12 w-full "
-      >
-        {loading ? (
-          <TailSpin
-            visible={true}
-            height="30"
-            width="30"
-            color="white"
-            ariaLabel="tail-spin-loading"
-            radius="1"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
-        ) : (
-          "Submit"
-        )}
-      </button>
-    );
-  };
-
-  const renderEmailInput: ReactElementFunctionType = () => {
-    return (
-      <>
-        <label
-          style={{ color: "rgba(80, 88, 135, 1)" }}
-          className=" font-medium"
+        <button
+          type="submit"
+          className="flex justify-center items-center mt-5 mb-2 bg-blue-500 text-white font-medium text-sm rounded-lg h-12 w-full"
         >
-          Email
-        </label>
-
-        <div className="flex items-center border-2 border-gray-300 rounded-lg h-12 pl-2 transition focus-within:border-blue-500">
-          <IoMdMail className="mr-2" size={20} />
-          <input
-            required
-            onChange={handleChange}
-            name="email"
-            value={formData.email}
-            type="email"
-            className="ml-2 border-none h-full focus:outline-none w-[80%]"
-            placeholder="Enter your Email"
-          />
-        </div>
-      </>
-    );
-  };
-
-  const renderLogo: ReactElementFunctionType = () => {
-    return (
-      <h1
-        style={{ color: "rgba(248, 154, 35, 1)" }}
-        className="font-bold text-xl text-center"
-      >
-        Money{" "}
-        <span className="" style={{ color: "rgba(2, 150, 156, 1)" }}>
-          Matters
-        </span>
-      </h1>
-    );
-  };
-
-  const renderLoginHeader: ReactElementFunctionType = () => {
-    return (
-      <h1
-        style={{ color: "rgba(80, 88, 135, 1)" }}
-        className=" font-medium text-xl mb-3 text-center"
-      >
-        {admin && "Admin "}Login
-      </h1>
-    );
-  };
-
-  const renderLoginForm: ReactElementFunctionType = () => {
-    return (
-      <form
-        onSubmit={handleSubmit}
-        className="shadow-2xl flex flex-col gap-3 bg-white dark:bg-slate-800 p-8 w-4/5 max-w-md min-w-[300px] rounded-2xl text-sm"
-      >
-        {renderLogo()}
-        {renderLoginHeader()}
-        {renderEmailInput()}
-        {renderPasswordInput()}
-        {renderSubmitButton()}
+          {loading ? (
+            <TailSpin visible={true} height="30" width="30" color="white" />
+          ) : (
+            "Submit"
+          )}
+        </button>
       </form>
-    );
-  };
-
-  return (
-    <div className="flex flex-col items-center justify-center bg-white min-w-[300px] min-h-dvh">
-      {renderLoginForm()}
     </div>
   );
 };

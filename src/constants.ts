@@ -4,7 +4,7 @@ export const LOGIN_ROUTE = "/login";
 export const ADMIN_LOGIN_ROUTE = "/admin/login";
 export const HOME_ROUTE = "/";
 export const TRANSACTION_ROUTE = "/transactions";
-export const DASHBOARD_ROUTE = "/dashboard";
+export const DASHBOARD_ROUTE = "/";
 export const X_HASURA_ROLE = "user";
 export const X_HASURA_ADMIN_SECRET =
   "g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF";
@@ -24,6 +24,14 @@ export const SIDEBAR_OPTIONS: SidebarOptionsEnum[] = [
   SidebarOptionsEnum.DASHBOARD,
   SidebarOptionsEnum.TRANSACTION,
 ];
+
+export const NAVIGATION_PATHS: {
+  transactions: string;
+  dashboard: string;
+} = {
+  transactions: "/transactions",
+  dashboard: "/",
+};
 
 export const NUMBER_OF_TRANSACTIONS = 3;
 export const LOCALSTORAGE_KEY = "userData";

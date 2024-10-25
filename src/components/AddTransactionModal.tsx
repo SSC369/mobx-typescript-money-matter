@@ -21,6 +21,7 @@ import {
   AddTransactionModalType,
   ReactElementFunctionType,
   TransactionFormData,
+  TransactionResponseType,
   TransactionType,
   VoidFunctionType,
 } from "../types";
@@ -75,7 +76,7 @@ const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
       return true;
     };
 
-    const handleSuccess: (data: TransactionType) => void = (data) => {
+    const handleSuccess: (data: TransactionResponseType) => void = (data) => {
       toast.success("Transaction Added");
       transactionStore.addTransaction(data);
       setFormData({

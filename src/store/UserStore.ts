@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
-import { LOCALSTORAGE_KEY } from "../constants";
-import { getDataFromLocalStorage } from "../utils/localStorageUtils";
 import { LocalStorageDataType, UserContextDataType } from "../types";
+import { getDataFromLocalStorage } from "../utils/localStorageUtils";
+import { LOCALSTORAGE_KEY } from "../constants";
 
 class UserStore {
   showMenu: boolean = false;
@@ -12,11 +12,21 @@ class UserStore {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
-  get userContextData(): UserContextDataType {
-    const { userId, admin } = this.userData;
-    return { userId, isAdmin: admin, showMenu: this.showMenu };
+  setUserData(data: LocalStorageDataType) {
+    this.userData = data;
   }
 
+  get getUserData(): LocalStorageDataType | null {
+    return this.userData;
+  }
+
+  get userContextData(): UserContextDataType | null {
+    if (this.userData?.userId) {
+      const { userId, admin } = this.userData;
+      return { userId, isAdmin: admin, showMenu: this.showMenu };
+    }
+    return null;
+  }
   toggleMenu(): void {
     this.showMenu = !this.showMenu;
   }

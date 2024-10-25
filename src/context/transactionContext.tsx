@@ -8,6 +8,7 @@ import {
   API_ALL_TRANSACTIONS,
   API_TOTAL_DEBIT_CREDIT_TRANSACTIONS,
   INITIAL_ACTIVE_TAB,
+  LOCALSTORAGE_KEY,
   LOGIN_ROUTE,
   SUCCESS_OK,
   TRANSACTIONS_LIMIT,
@@ -22,6 +23,8 @@ import {
   TransactionContextType,
   TransactionResponseType,
 } from "../types";
+import { getDataFromLocalStorage } from "../utils/localStorageUtils";
+import UserStore from "../store/UserStore";
 
 export const TransactionContext = createContext<TransactionContextType | null>(
   null
@@ -38,11 +41,9 @@ export const TransactionContextProvider: React.FC<
   const [deleteTransactionId, setDeleteTransactionId] = useState<number | null>(
     null
   );
-  const userId: number = userStore.userContextData!.userId;
   const navigate = useNavigate();
-  if (!userId) {
-    return <></>;
-  }
+
+  const userId = getDataFromLocalStorage(LOCALSTORAGE_KEY)?.userId;
 
   useEffect(() => {
     if (!userId) {
@@ -54,6 +55,9 @@ export const TransactionContextProvider: React.FC<
     url: string
   ) => Promise<TransactionResponseType[]> = async (url) => {
     try {
+      if (!userId) {
+        return;
+      }
       const res = await axios({
         method: "get",
         baseURL: url,
@@ -94,6 +98,9 @@ export const TransactionContextProvider: React.FC<
   const totalDebitCreditTransactionsFetcher: (
     url: string
   ) => Promise<CreditAndDebitTotalType> = async (url) => {
+    if (!userId) {
+      return;
+    }
     try {
       const res = await axios.get(url, {
         headers: {
@@ -133,24 +140,26 @@ export const TransactionContextProvider: React.FC<
     }
   }, [isTotalDebitCreditTransactionsLoading]);
 
-  return (
-    <TransactionContext.Provider
-      value={{
-        activeTab,
-        setActiveTab,
-        isTransactionsLoading,
-        isTotalDebitCreditTransactionsLoading,
-        showEditTransactionModal,
-        setShowEditTransactionModal,
-        deleteTransactionId,
-        setDeleteTransactionId,
-        transactionsError,
-        totalDebitCreditTransactionsError,
-        showAddTransactionModal,
-        setShowAddTransactionModal,
-      }}
-    >
-      {children}
-    </TransactionContext.Provider>
-  );
+  if (userId) {
+    return (
+      <TransactionContext.Provider
+        value={{
+          activeTab,
+          setActiveTab,
+          isTransactionsLoading,
+          isTotalDebitCreditTransactionsLoading,
+          showEditTransactionModal,
+          setShowEditTransactionModal,
+          deleteTransactionId,
+          setDeleteTransactionId,
+          transactionsError,
+          totalDebitCreditTransactionsError,
+          showAddTransactionModal,
+          setShowAddTransactionModal,
+        }}
+      >
+        {children}
+      </TransactionContext.Provider>
+    );
+  }
 };

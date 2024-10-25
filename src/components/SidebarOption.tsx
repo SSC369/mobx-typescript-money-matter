@@ -11,6 +11,7 @@ import {
   SidebarOptionsEnum,
   VoidFunctionType,
 } from "../types";
+import { NAVIGATION_PATHS } from "../constants";
 
 const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
   ({ option }) => {
@@ -60,7 +61,7 @@ const SidebarOption: React.FC<SidebarOptionPropsType> = observer(
     };
 
     const handleClickSidebarOption: VoidFunctionType = () => {
-      navigate(currentPath);
+      navigate(NAVIGATION_PATHS[option]);
       if (window.innerWidth < 768) {
         userStore.toggleMenu();
       }
