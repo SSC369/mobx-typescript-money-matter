@@ -2,9 +2,10 @@ import { makeAutoObservable } from "mobx";
 import { NUMBER_OF_TRANSACTIONS } from "../constants";
 import { CreditAndDebitTotalType, TransactionType } from "../types";
 import TransactionModel from "./TransactionModel";
+import TotalTransactionsModel from "./TotalTransactionsModel";
 
 class TransactionStore {
-  totalDebitCreditTransactionsData: CreditAndDebitTotalType = [];
+  totalDebitCreditTransactionsData: TotalTransactionsModel[] = [];
   transactions: TransactionModel[] = [];
 
   constructor() {
@@ -23,7 +24,7 @@ class TransactionStore {
   get getTransactions(): TransactionModel[] {
     return this.sortTransactions();
   }
-  get getTotalDebitCreditTransactionsData(): CreditAndDebitTotalType {
+  get getTotalDebitCreditTransactionsData(): TotalTransactionsModel[] {
     return this.totalDebitCreditTransactionsData;
   }
 
@@ -44,38 +45,26 @@ class TransactionStore {
   }
 
   setTotalDebitCreditTransactionsData(data: CreditAndDebitTotalType): void {
-    this.totalDebitCreditTransactionsData = data;
+    data.forEach((total) => {
+      const { type, sum } = total;
+      const totalTransactionObject = new TotalTransactionsModel(sum, type);
+      this.totalDebitCreditTransactionsData.push(totalTransactionObject);
+    });
   }
 
-  addAmountTotalDebitCreditData(type: string, amount: number): void {
-    this.totalDebitCreditTransactionsData =
-      this.totalDebitCreditTransactionsData.map((data) => {
-        if (data.type === type) {
-          return {
-            type: type,
-            sum: data.sum + amount,
-          };
-        }
-        return data;
-      });
-  }
-
-  removeAmountTotalDebitCreditData(type: string, amount: number): void {
-    this.totalDebitCreditTransactionsData =
-      this.totalDebitCreditTransactionsData.map((data) => {
-        if (data.type === type) {
-          return {
-            type: type,
-            sum: data.sum - amount,
-          };
-        }
-        return data;
-      });
-  }
-
-  addTransaction(transaction: TransactionModel): void {
-    this.transactions.push(transaction);
-    this.addAmountTotalDebitCreditData(transaction.type, transaction.amount);
+  addTransaction(transaction: TransactionType): void {
+    const { transaction_name, amount, type, id, date, category } = transaction;
+    const transactionObject = new TransactionModel(
+      transaction_name,
+      id,
+      type,
+      date,
+      category,
+      amount
+    );
+    this.transactions.push(transactionObject);
+    const totalObj = this.getTransactionTypeTotal(type);
+    totalObj.addAmount(amount, type);
   }
 
   deleteTransaction(data: { id: number }): void {
@@ -86,7 +75,9 @@ class TransactionStore {
     this.transactions = this.transactions.filter(
       (transaction) => transaction.id !== id
     );
-    this.removeAmountTotalDebitCreditData(transaction.type, transaction.amount);
+    const { type, amount } = transaction;
+    const totalObj = this.getTransactionTypeTotal(type);
+    totalObj.removeAmount(amount, type);
   }
 
   get getLatestTransactions(): TransactionModel[] {
@@ -98,8 +89,14 @@ class TransactionStore {
     return latestTransactions;
   }
 
-  getTransaction(id: number): TransactionModel | undefined {
-    return this.transactions.find((transaction) => transaction.id === id);
+  getTransaction(id: number): TransactionModel {
+    return this.transactions.find((transaction) => transaction.id === id)!;
+  }
+
+  getTransactionTypeTotal(type: string): TotalTransactionsModel {
+    return this.totalDebitCreditTransactionsData.find(
+      (total) => total.type === type
+    )!;
   }
 }
 

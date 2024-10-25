@@ -1,5 +1,5 @@
 import { TransactionType } from "../types";
-import TransactionStore from "./TransactionStore";
+import transactionStore from "./TransactionStore";
 
 class TransactionModel {
   transaction_name;
@@ -26,8 +26,15 @@ class TransactionModel {
 
   updateTransaction(transaction: TransactionType): void {
     const { transaction_name, id, type, date, category, amount } = transaction;
-    TransactionStore.removeAmountTotalDebitCreditData(this.type, this.amount);
-    TransactionStore.addAmountTotalDebitCreditData(type, amount);
+    const modelTypeTotalObject = transactionStore.getTransactionTypeTotal(
+      this.type
+    );
+    modelTypeTotalObject.removeAmount(this.amount, this.type);
+
+    const transactionTypeTotalObject =
+      transactionStore.getTransactionTypeTotal(type);
+    transactionTypeTotalObject.addAmount(amount, type);
+
     this.transaction_name = transaction_name;
     this.id = id;
     this.type = type;
