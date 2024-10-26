@@ -59,6 +59,12 @@ export const TRANSACTION_TYPES = [
   { value: "debit", name: "Debit" },
 ];
 
+export const LANGUAGES = [
+  { value: "en", name: "English" },
+  { value: "te", name: "తెలుగు" },
+  { value: "hi", name: "हिंदी" },
+];
+
 export const TRANSACTION_TYPES_OBJECT = {
   credit: "credit",
   debit: "debit",
@@ -92,3 +98,5 @@ export const TRANSACTIONS_OFFSET = 0;
 export const THEME_KEY = "theme";
 export const LIGHT_MODE_KEY = "light";
 export const DARK_MODE_KEY = "dark";
+export const LOCALSTORAGE_LANGUAGE_KEY = "language";
+export const DEFAULT_LANGUAGE = "en";

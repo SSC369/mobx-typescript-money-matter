@@ -193,10 +193,10 @@ const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
             name="category"
           >
             {CATEGORY_OPTIONS.map((option) => {
-              const { name, value } = option;
+              const { value } = option;
               return (
                 <option key={value} value={value}>
-                  {name}
+                  {t(`transactionModal.categoryOptions.${value}`)}
                 </option>
               );
             })}
@@ -219,10 +219,10 @@ const EditTransactionModal: React.FC<EditTransactionModalType> = observer(
             value={formData.type}
           >
             {TRANSACTION_TYPES.map((option) => {
-              const { name, value } = option;
+              const { value } = option;
               return (
                 <option key={value} value={value}>
-                  {name}
+                  {t(`transactionModal.transactionOptions.${value}`)}
                 </option>
               );
             })}

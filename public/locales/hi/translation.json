@@ -57,6 +57,17 @@
     "category": "श्रेणी",
     "amount": "राशि",
     "date": "तारीख",
+    "categoryOptions": {
+      "": "श्रेणी चुनें",
+      "food": "भोजन",
+      "shopping": "खरीदारी",
+      "entertainment": "मनोरंजन"
+    },
+    "transactionOptions": {
+      "": "लेनदेन प्रकार चुनें",
+      "credit": "क्रेडिट",
+      "debit": "डेबिट"
+    },
     "add": {
       "title": "लेनदेन जोड़ें",
       "description": "अपना लेनदेन जोड़ें",

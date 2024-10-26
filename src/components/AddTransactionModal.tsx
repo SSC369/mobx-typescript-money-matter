@@ -22,7 +22,6 @@ import {
   ReactElementFunctionType,
   TransactionFormData,
   TransactionResponseType,
-  TransactionType,
   VoidFunctionType,
 } from "../types";
 import { useTranslation } from "react-i18next";
@@ -146,10 +145,10 @@ const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
             name="category"
           >
             {CATEGORY_OPTIONS.map((option) => {
-              const { name, value } = option;
+              const { value } = option;
               return (
                 <option key={value} value={value}>
-                  {name}
+                  {t(`transactionModal.categoryOptions.${value}`)}
                 </option>
               );
             })}
@@ -172,10 +171,10 @@ const AddTransactionModal: React.FC<AddTransactionModalType> = observer(
             value={formData.type}
           >
             {TRANSACTION_TYPES.map((option) => {
-              const { name, value } = option;
+              const { value } = option;
               return (
                 <option key={value} value={value}>
-                  {name}
+                  {t(`transactionModal.transactionOptions.${value}`)}
                 </option>
               );
             })}

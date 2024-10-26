@@ -153,6 +153,15 @@ interface LoginFormDataType {
   password: string;
 }
 
+interface LanguageOptionType {
+  value: string;
+  name: string;
+}
+
+interface LanguageOptionPropsType {
+  language: LanguageOptionType;
+}
+
 export type {
   TransactionType,
   CreditAndDebitTotalType,
@@ -177,4 +186,6 @@ export type {
   InputElementPropsType,
   SelectInputPropsType,
   LoginFormDataType,
+  LanguageOptionPropsType,
+  LanguageOptionType,
 };

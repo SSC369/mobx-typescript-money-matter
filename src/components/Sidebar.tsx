@@ -12,17 +12,21 @@ import ConfirmModal from "./ConfirmModal";
 import {
   ACTION_TYPES,
   API_PROFILE_URL,
-  LANGUAGE_OPTIONS,
+  LANGUAGES,
   LOCALSTORAGE_KEY,
   LOGIN_ROUTE,
   SIDEBAR_OPTIONS,
   SUCCESS_OK,
 } from "../constants";
-import { removeDataFromLocalStorage } from "../utils/localStorageUtils";
+import {
+  addLangugageIntoLocalStorage,
+  removeDataFromLocalStorage,
+} from "../utils/localStorageUtils";
 import { TRANSACTION_HEADERS } from "../utils/headerUtils";
 import { sidebarContainer } from "../styles";
 import userStore from "../store/UserStore";
 import {
+  LanguageOptionType,
   ReactElementFunctionType,
   SidebarOptionsEnum,
   UserProfileDataType,
@@ -32,11 +36,14 @@ import {
 import { useTranslation } from "react-i18next";
 import LanguageOption from "./LanguageOption";
 import { v4 } from "uuid";
+import i18next from "i18next";
+import { FiChevronDown } from "react-icons/fi";
 
 const Sidebar: React.FC = observer(() => {
   const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserProfileDataType | null>(null);
   const [isLogoutLoading, setIsLogoutLoading] = useState<boolean>(false);
+
   const { userId } = userStore.userContextData!;
 
   const { t } = useTranslation();
@@ -94,7 +101,7 @@ const Sidebar: React.FC = observer(() => {
   const renderOptions: ReactElementFunctionType = () => {
     const options: SidebarOptionsEnum[] = SIDEBAR_OPTIONS;
     return (
-      <ul className="flex flex-col w-full">
+      <ul className="flex flex-col w-full mb-6">
         {options.map((option) => (
           <SidebarOption key={option} option={option} />
         ))}
@@ -139,20 +146,33 @@ const Sidebar: React.FC = observer(() => {
     userStore.toggleMenu();
   };
 
-  const renderLanguages = () => {
-    const languages: string[] = Object.keys(LANGUAGE_OPTIONS);
+  const renderLanguages: ReactElementFunctionType = () => {
+    const changeLanguage = (lng: string) => i18next.changeLanguage(lng);
+    const currentLanguage: string = i18next.language;
+
+    const handleChangeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const modifiedLanguage = e.target.value;
+
+      changeLanguage(modifiedLanguage);
+      addLangugageIntoLocalStorage(modifiedLanguage);
+      handleMenuClose();
+    };
+
     return (
-      <ul className="pl-8 flex flex-col gap-4 mt-8">
-        {languages.map((language: string) => {
-          return (
-            <LanguageOption
-              key={v4()}
-              handleMenuClose={handleMenuClose}
-              language={language}
-            />
-          );
-        })}
-      </ul>
+      <div className="relative flex flex-col gap-1 w-[80%] self-center">
+        <select
+          onChange={handleChangeLanguage}
+          className="border-2 dark:bg-slate-700 dark:border-slate-600 dark:text-white text-sm px-2 py-2 appearance-none rounded-lg bg-slate-100 text-slate-500 outline-none font-medium cursor-pointer"
+          value={currentLanguage}
+        >
+          {LANGUAGES.map((language: LanguageOptionType) => {
+            return <LanguageOption key={v4()} language={language} />;
+          })}
+        </select>
+        <div className="pointer-events-none absolute top-2.5 right-3 flex items-center text-slate-500 dark:text-slate-200">
+          <FiChevronDown className="w-5 h-5" />
+        </div>
+      </div>
     );
   };
 

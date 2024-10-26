@@ -57,6 +57,17 @@
     "category": "వర్గం",
     "amount": "మొత్తం",
     "date": "తేదీ",
+    "categoryOptions": {
+      "": "వర్గాన్ని ఎంచుకోండి",
+      "food": "ఆహారం",
+      "shopping": "షాపింగ్",
+      "entertainment": "వినోదం"
+    },
+    "transactionOptions": {
+      "": "లావాదేవీ రకాన్ని ఎంచుకోండి",
+      "credit": "క్రెడిట్",
+      "debit": "డెబిట్"
+    },
     "add": {
       "title": "లావాదేవీ జోడించండి",
       "description": "మీ లావాదేవీని జోడించండి",

@@ -57,6 +57,17 @@
     "category": "Category",
     "amount": "Amount",
     "date": "Date",
+    "categoryOptions": {
+      "": "Select Category",
+      "food": "Food",
+      "shopping": "Shopping",
+      "entertainment": "Entertainment"
+    },
+    "transactionOptions": {
+      "": "Select Transaction Type",
+      "credit": "Credit",
+      "debit": "Debit"
+    },
     "add": {
       "title": "Add Transaction",
       "description": "Add your transaction",
